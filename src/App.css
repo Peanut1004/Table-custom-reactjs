@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.table-component {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.cart-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tbody,
+th,
+td {
+  border: 1px solid #878383;
+}
+
+.table-cart thead {
+  background-color: #4a8546;
+}
+
+.table-cart thead tr th {
+  padding: 15px 0;
+}
+
+.info-bottom {
+  display: flex;
+  justify-content: space-between;
+}
