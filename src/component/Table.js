@@ -1,22 +1,16 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
-// import { initialState, reducer } from "../reducer/reducer";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../Context";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { MdOutlineUpdate } from "react-icons/md";
-
-import Form from "./Form";
 
 function Table() {
   const {
     products,
     total,
-    isShow,
-    isClickUpdate,
-    handleIsClickUpdate,
-    handleTogge,
-    handleUpdateProduct,
+    isUpdate,
+    handleChangeQuantity,
     handleRemoveProduct,
     handleTotal,
+    formatPrice,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -24,61 +18,76 @@ function Table() {
   }, [products]);
 
   return (
-    <div className="table-component">
-      <div className="cart-table">
-        <table>
-          <thead>
-            <tr>
-              <td>Id</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Action</td>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((el) => {
-              const { id, name, price, amount } = el;
-              return (
-                <tr key={id} onClick={() => handleIsClickUpdate(id)}>
-                  <td>{id}</td>
-                  <td>
-                    {!isClickUpdate ? (
-                      <div>{name}</div>
-                    ) : (
-                      <input
-                        value={name}
-                        onChange={(e) => handleUpdateProduct(e.target.value)}
-                      />
-                    )}
-                  </td>
-                  <td>{price}</td>
-                  <td>{amount}</td>
-                  <td>
-                    {!isClickUpdate ? (
-                      <div>
-                        <AiOutlineCloseCircle
-                          onClick={() => handleRemoveProduct(id)}
-                        />
-                        <MdOutlineUpdate
-                          onClick={() => handleUpdateProduct(el)}
-                        />
-                      </div>
-                    ) : (
-                      "Update"
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <div className="info-bottom">
-          <button onClick={handleTogge}>Create Product</button>
-          <div className="totle">Total: {total}</div>
+    <div className="cart-info">
+      {products.length > 0 ? (
+        <>
+          <table>
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>SubTotal</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              {products
+                .map((el, index) => {
+                  const { id, name, quantity, price } = el;
+                  return (
+                    <tr key={id}>
+                      <td>{id}</td>
+                      <td>
+                        <div>{name}</div>
+                      </td>
+                      <td>
+                        <div>
+                          <input
+                            value={quantity}
+                            type="number"
+                            onChange={(e) =>
+                              handleChangeQuantity(
+                                "quantity",
+                                e.target.value,
+                                index
+                              )
+                            }
+                          />
+                        </div>
+                      </td>
+                      <td>{price}</td>
+                      <td>
+                        {formatPrice(el.quantity * formatPrice(el.price))}
+                      </td>
+                      <td>
+                        {!isUpdate ? (
+                          <AiOutlineCloseCircle
+                            onClick={() => handleRemoveProduct(id)}
+                          />
+                        ) : (
+                          <div>Update</div>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })
+                .filter((el) => el.quantity !== 0)}
+            </tbody>
+          </table>
+          <div className="cart-total">
+            <p>Total: {total}</p>
+          </div>
+        </>
+      ) : (
+        <div className="empty-cart">
+          <h3>Your cart is empty</h3>
+          <p>
+            No items added in your cart. Please add product to yourcart list.
+          </p>
         </div>
-      </div>
-      {isShow && <Form />}
+      )}
     </div>
   );
 }

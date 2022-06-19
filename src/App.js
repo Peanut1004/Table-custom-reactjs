@@ -1,12 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Table from "./component/Table";
+import Form from "./component/Form";
 function App() {
-  return (
-    <div>
-      <Table />
-    </div>
-  );
+  return <Form />;
 }
 
 export default App;
