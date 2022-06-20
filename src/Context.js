@@ -92,9 +92,16 @@ function AppProvider({ children }) {
   const handleChangeQuantity = (type, value, index) => {
     const newProduct = [...products];
     const newItem = { ...products[index] };
-    newItem[type] = value;
-    newProduct[index] = newItem;
-    setProducts(newProduct);
+    // console.log(newProduct.filter((el) => console.log(el)));
+    console.log(+value === 0);
+    if (+value === 0) {
+      newProduct.splice(index, 1);
+      setProducts(newProduct);
+    } else {
+      newItem[type] = value;
+      newProduct[index] = newItem;
+      setProducts(newProduct);
+    }
   };
 
   // handle remove product

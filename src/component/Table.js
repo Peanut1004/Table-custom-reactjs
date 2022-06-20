@@ -47,6 +47,8 @@ function Table() {
                           <input
                             value={quantity}
                             type="number"
+                            min="0"
+                            max="10"
                             onChange={(e) =>
                               handleChangeQuantity(
                                 "quantity",

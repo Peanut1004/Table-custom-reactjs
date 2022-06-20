@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { AppContext } from "../Context";
 
 function Modal() {
-  const { handleButtonModal, formError } = useContext(AppContext);
+  const { handleButtonModal, formError, isError } = useContext(AppContext);
 
   return (
-    <div className="modal">
+    <div className={isError ? "modal transition" : "modal"}>
       <div className="modal-wrap">
         <h3 className="modal-title">Invalid</h3>
         <div className="modal-content">

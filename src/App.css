@@ -209,6 +209,19 @@ svg {
 
 /*modal*/
 .modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(35 33 33 / 80%);
+  transition: all 5s ease-in-out;
+}
+
+.modal-wrap {
   width: 500px;
   top: 50%;
   left: 0;
@@ -218,7 +231,13 @@ svg {
   transform: translateY(-50%);
   color: #fff;
   background-color: #000;
+
+  transition: all 5s ease-in-out;
 }
+
+/* .transition .modal-wrap {
+  top: 50%;
+} */
 
 .modal .modal-title {
   padding: 14px 24px;
