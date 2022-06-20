@@ -49,9 +49,11 @@ function AppProvider({ children }) {
         error.quantity =
           "Please enter Quantity is getter than zero and max value is 10";
       }
+
       if (
         price === "" ||
-        (formatPrice(price) <= 1000000 && formatPrice(price) >= 10000000)
+        1000000 > formatPrice(price) ||
+        formatPrice(price) > 10000000
       ) {
         error.price =
           "Please enter Price with value from 1,000,000 to 10,000,000";
