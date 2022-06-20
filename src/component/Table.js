@@ -33,49 +33,45 @@ function Table() {
               </tr>
             </thead>
             <tbody>
-              {products
-                .map((el, index) => {
-                  const { id, name, quantity, price } = el;
-                  return (
-                    <tr key={id}>
-                      <td>{id}</td>
-                      <td>
-                        <div>{name}</div>
-                      </td>
-                      <td>
-                        <div>
-                          <input
-                            value={quantity}
-                            type="number"
-                            min="0"
-                            max="10"
-                            onChange={(e) =>
-                              handleChangeQuantity(
-                                "quantity",
-                                e.target.value,
-                                index
-                              )
-                            }
-                          />
-                        </div>
-                      </td>
-                      <td>{price}</td>
-                      <td>
-                        {formatPrice(el.quantity * formatPrice(el.price))}
-                      </td>
-                      <td>
-                        {!isUpdate ? (
-                          <AiOutlineCloseCircle
-                            onClick={() => handleRemoveProduct(id)}
-                          />
-                        ) : (
-                          <div>Update</div>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })
-                .filter((el) => el.quantity !== 0)}
+              {products.map((el, index) => {
+                const { id, name, quantity, price } = el;
+                return (
+                  <tr key={id}>
+                    <td>{id}</td>
+                    <td>
+                      <div>{name}</div>
+                    </td>
+                    <td>
+                      <div>
+                        <input
+                          value={quantity}
+                          type="number"
+                          min="0"
+                          max="10"
+                          onChange={(e) =>
+                            handleChangeQuantity(
+                              "quantity",
+                              e.target.value,
+                              index
+                            )
+                          }
+                        />
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                    <td>{formatPrice(el.quantity * formatPrice(el.price))}</td>
+                    <td>
+                      {!isUpdate ? (
+                        <AiOutlineCloseCircle
+                          onClick={() => handleRemoveProduct(id)}
+                        />
+                      ) : (
+                        <div>Update</div>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div className="cart-total">
