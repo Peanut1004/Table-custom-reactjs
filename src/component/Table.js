@@ -81,9 +81,9 @@ function Table() {
       ) : (
         <div className="empty-cart">
           <h3>Your cart is empty</h3>
-          <p>
+          {/* <p>
             No items added in your cart. Please add product to yourcart list.
-          </p>
+          </p> */}
         </div>
       )}
     </div>

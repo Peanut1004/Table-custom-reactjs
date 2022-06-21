@@ -195,10 +195,6 @@ td {
   margin-bottom: 5px;
 }
 
-/* .form .form-button button {
-  margin-right: 10px;
-} */
-
 svg {
   font-size: 20px;
 }
@@ -231,8 +227,7 @@ svg {
   transform: translateY(-50%);
   color: #fff;
   background-color: #000;
-
-  transition: all 5s ease-in-out;
+  transition: all 0.3s;
 }
 
 /* .transition .modal-wrap {

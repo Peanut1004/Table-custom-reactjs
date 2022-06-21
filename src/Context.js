@@ -19,37 +19,32 @@ function AppProvider({ children }) {
   ];
 
   const [products, setProducts] = useState(data);
-  // const [isShow, setIsShow] = useState(false);
   const [isProduct, setIsProduct] = useState(true);
-  const [isUpdate, setUpdate] = useState(false);
+  // const [isUpdate, setUpdate] = useState(false);
   const [total, setTotal] = useState(null);
 
   const [isError, setIsError] = useState(false);
   const [formError, setFormError] = useState({});
-
-  // quantity < 10
-  // price < 10,000,000
-  // name length > 0 &&
 
   // handle Error Input
   const handleButtonModal = () => {
     setIsError(false);
   };
 
-  // checkError
-  const checkRequired = (arr) => {
+  // handle error modal
+  const handleErrorModal = (arr) => {
+    let isRequired = false;
     let error = {};
+
     arr.map((el) => {
       const { name, quantity, price } = el;
       if (name === "" || (name && name.length > 20)) {
         error.name = "Please enter Product Name(not empty, max length is 20)";
       }
-
       if (quantity === "" || +quantity === 0 || +quantity > 10) {
         error.quantity =
           "Please enter Quantity is getter than zero and max value is 10";
       }
-
       if (
         price === "" ||
         1000000 > formatPrice(price) ||
@@ -59,12 +54,14 @@ function AppProvider({ children }) {
           "Please enter Price with value from 1,000,000 to 10,000,000";
       }
     });
-    setFormError(error);
-  };
-
-  const handleErrorModal = (arr) => {
-    setIsError(true);
-    checkRequired(arr);
+    for (let keys in error) {
+      if (error.hasOwnProperty(keys)) {
+        isRequired = true;
+        setIsError(true);
+        setFormError(error);
+      }
+    }
+    return isRequired;
   };
 
   // handle add product
@@ -74,7 +71,6 @@ function AppProvider({ children }) {
       products.map((el) => el.id)
     );
     setProducts([...products, { ...item, id: id + 1 }]);
-    // setIsShow(false);
   };
 
   // format price total
@@ -86,7 +82,6 @@ function AppProvider({ children }) {
     if (typeof price === "number") {
       newPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
     return newPrice;
   };
 
@@ -112,7 +107,7 @@ function AppProvider({ children }) {
     setProducts(newItem);
   };
 
-  // handleTotal
+  // handle Total
   const handleTotal = () => {
     let totalProduct = products.reduce((total, el) => {
       return (total = total + formatPrice(el.price) * el.quantity);
@@ -125,9 +120,8 @@ function AppProvider({ children }) {
       value={{
         products,
         total,
-        // isShow,
         isProduct,
-        isUpdate,
+        // isUpdate,
         isError,
         handleChangeQuantity,
         handleAddProduct,

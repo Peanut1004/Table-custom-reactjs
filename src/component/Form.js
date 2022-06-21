@@ -16,20 +16,26 @@ function Form() {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
 
+  // handle price commas
+  const handlePriceCustom = (value) => {
+    let temp = value.replace(/[^0-9.]/g, "");
+    let commasNumber = Number(temp).toLocaleString("en-AU");
+    setPrice(commasNumber);
+  };
+
   const handleProduct = (e) => {
     e.preventDefault();
-    if (isProduct) {
-      if (!name || !quantity || !price) {
-        handleErrorModal([{ name }, { quantity }, { price }]);
-      } else {
-        handleAddProduct({ name, quantity, price });
-        setName("");
-        setQuantity("");
-        setPrice("");
-      }
-    } else {
-      handleUpdateProduct();
+    // if (isProduct) {
+    let checkInput = [{ name }, { quantity }, { price }];
+    if (!handleErrorModal(checkInput)) {
+      handleAddProduct({ name, quantity, price });
+      setName("");
+      setQuantity("");
+      setPrice("");
     }
+    // } else {
+    //   handleUpdateProduct();
+    // }
   };
 
   return (
@@ -58,7 +64,7 @@ function Form() {
               <input
                 type="text"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => handlePriceCustom(e.target.value)}
               />
             </div>
             <button className="create" onClick={handleProduct}>
