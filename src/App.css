@@ -235,8 +235,14 @@ svg {
 } */
 
 .modal .modal-title {
+  display: flex;
+  align-items: center;
   padding: 14px 24px;
   background-color: #711b1b;
+}
+
+.modal .modal-title svg {
+  margin: 3px 5px 0 0;
 }
 
 .modal .modal-content {

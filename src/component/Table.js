@@ -61,13 +61,13 @@ function Table() {
                     <td>{price}</td>
                     <td>{formatPrice(el.quantity * formatPrice(el.price))}</td>
                     <td>
-                      {!isUpdate ? (
-                        <AiOutlineCloseCircle
-                          onClick={() => handleRemoveProduct(id)}
-                        />
-                      ) : (
+                      {/* {!isUpdate ? ( */}
+                      <AiOutlineCloseCircle
+                        onClick={() => handleRemoveProduct(id)}
+                      />
+                      {/* ) : (
                         <div>Update</div>
-                      )}
+                      )} */}
                     </td>
                   </tr>
                 );

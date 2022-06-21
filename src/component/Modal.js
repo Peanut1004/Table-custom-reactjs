@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../Context";
+import { MdErrorOutline } from "react-icons/md";
 
 function Modal() {
   const { handleButtonModal, formError, isError } = useContext(AppContext);
@@ -8,7 +9,7 @@ function Modal() {
     <div className={isError ? "modal transition" : "modal"}>
       <div className="modal-wrap">
         <h3 className="modal-title">
-          Invalid
+          <MdErrorOutline /> Invalid
           {/* {Object.keys(formError).map((el, index) => (
             <p key={index}>
               {el} <span>,</span>
