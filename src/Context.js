@@ -90,7 +90,8 @@ function AppProvider({ children }) {
     const newProduct = [...products];
     const newItem = { ...products[index] };
     // console.log(newProduct.filter((el) => console.log(el)));
-    console.log(+value === 0);
+
+    // console.log(typeof value);
     if (+value === 0) {
       newProduct.splice(index, 1);
       setProducts(newProduct);
@@ -98,6 +99,9 @@ function AppProvider({ children }) {
       newItem[type] = value;
       newProduct[index] = newItem;
       setProducts(newProduct);
+    }
+    if (+value > 10) {
+      return;
     }
   };
 
